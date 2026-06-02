@@ -1,0 +1,27 @@
+*.csv
+!data/
+!data/dados_ficticios.csv
+Planilha Puxada/
+*.xlsx
+
+outputs/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.*
+credentials.*
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
