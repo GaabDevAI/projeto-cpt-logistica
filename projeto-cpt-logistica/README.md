@@ -1,26 +1,22 @@
 # BI Logistico de Turnos
 
-Projeto de portfolio em Python para transformar uma base CSV de viagens em um
-dashboard interativo de acompanhamento logistico por turno, destino e veiculo.
+Dashboard simples em Python para acompanhar viagens logisticas por horario,
+turno, destino e veiculo.
 
-O objetivo e simular um cenario operacional real, mas usando somente dados
-ficticios. Assim, o projeto pode ser publicado no GitHub e apresentado no
-LinkedIn sem expor informacoes sensiveis.
+A ideia do projeto foi transformar uma base CSV em uma visao mais facil de
+consultar, com filtros, indicadores e graficos. A base publicada aqui e
+ficticia, criada apenas para demonstracao.
 
-## Visao geral
+## O que o dashboard mostra
 
-O dashboard permite acompanhar:
+- viagens por turno;
+- horarios de saida;
+- origem e destino;
+- quantidade de veiculos;
+- pedidos e peso transportado;
+- agenda filtrada por turno, destino, veiculo e CPT.
 
-- Horario de saida dos veiculos.
-- Turno operacional de cada viagem.
-- Origem e destino das rotas.
-- Quantidade de veiculos.
-- Motoristas ficticios.
-- Volume de pedidos e peso transportado.
-- Status operacional.
-- Filtros por turno, destino, veiculo e CPT.
-
-Os turnos usados no projeto sao:
+## Turnos considerados
 
 ```text
 T1: 05:20 ate 13:40
@@ -28,64 +24,23 @@ T2: 13:20 ate 21:40
 T3: 22:00 ate 05:40
 ```
 
-## Tecnologias utilizadas
+## Tecnologias
 
 - Python
 - Pandas
 - Streamlit
 - Plotly
 - OpenPyXL
-- GitHub Actions
-- Dependabot
-- Bandit
-- pip-audit
 
-## Funcionalidades
+## Como rodar
 
-- Leitura de CSV com dados ficticios.
-- Consolidacao de viagens por origem e destino.
-- Classificacao automatica de horarios em T1, T2 e T3.
-- KPIs de viagens, veiculos, destinos, pedidos e peso.
-- Graficos interativos por turno, destino e horario.
-- Agenda operacional filtrada.
-- Download de CSV filtrado.
-- Geracao opcional de planilha Excel demonstrativa.
-- Validacoes de seguranca para reduzir risco de vazamento ou abuso.
-
-## Dados ficticios
-
-Este repositorio nao contem dados reais de operacao, pessoas, veiculos, rotas,
-clientes ou empresas.
-
-A base publica fica em:
-
-```text
-data/dados_ficticios.csv
-```
-
-Os veiculos usam identificadores demonstrativos, como:
-
-```text
-VEICULO_DEMO_001
-VEICULO_DEMO_002
-```
-
-Os motoristas tambem sao ficticios:
-
-```text
-Motorista Demo 001
-Motorista Demo 002
-```
-
-## Como rodar o dashboard
-
-Crie um ambiente virtual:
+Crie e ative um ambiente virtual:
 
 ```bash
 python -m venv .venv
 ```
 
-Ative o ambiente no Windows PowerShell:
+No Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -97,101 +52,36 @@ Instale as dependencias:
 pip install -r requirements.txt
 ```
 
-Execute o dashboard:
+Inicie o dashboard:
 
 ```bash
 streamlit run app.py
 ```
 
-## Como gerar uma nova base ficticia
-
-```bash
-python scripts/gerar_dados_ficticios.py
-```
-
-## Como gerar a planilha Excel demonstrativa
-
-```bash
-python scripts/gerar_planilha_bi.py
-```
-
-A planilha sera criada em:
+## Arquivos principais
 
 ```text
-outputs/bi_logistico_ficticio.xlsx
+app.py                         dashboard em Streamlit
+data/dados_ficticios.csv       base usada na demonstracao
+src/logistics_bi.py            tratamento dos dados e regras de turno
+src/security.py                validacoes simples de entrada e exportacao
+scripts/gerar_dados_ficticios.py
+scripts/gerar_planilha_bi.py
 ```
 
-## Estrutura do projeto
+## Dados
 
-```text
-.
-|-- app.py
-|-- data/
-|   `-- dados_ficticios.csv
-|-- docs/
-|   |-- post_linkedin.md
-|   `-- seguranca_github.md
-|-- scripts/
-|   |-- gerar_dados_ficticios.py
-|   `-- gerar_planilha_bi.py
-|-- src/
-|   |-- __init__.py
-|   |-- logistics_bi.py
-|   `-- security.py
-|-- .github/
-|   |-- CODEOWNERS
-|   |-- dependabot.yml
-|   |-- pull_request_template.md
-|   `-- workflows/security-checks.yml
-|-- .streamlit/
-|   `-- config.toml
-|-- SECURITY.md
-|-- requirements.txt
-`-- README.md
-```
+Este repositorio usa somente dados ficticios. Nomes, veiculos, rotas e volumes
+foram criados para demonstracao e nao representam uma operacao real.
 
-## Como o codigo esta organizado
+Arquivos locais com dados reais, CSVs exportados e planilhas `.xlsx` ficam fora
+do Git pelo `.gitignore`.
 
-- `app.py`: interface do dashboard em Streamlit.
-- `src/logistics_bi.py`: regras de consolidacao, horarios e turnos.
-- `src/security.py`: validacoes de seguranca usadas pelo app e pelos scripts.
-- `scripts/gerar_dados_ficticios.py`: cria uma base demonstrativa.
-- `scripts/gerar_planilha_bi.py`: cria uma planilha Excel demonstrativa.
-- `docs/post_linkedin.md`: sugestao de texto para publicacao no LinkedIn.
+## O que pratiquei neste projeto
 
-## Seguranca e privacidade
-
-O projeto foi preparado para publicacao publica:
-
-- Arquivos CSV reais sao ignorados pelo Git.
-- Planilhas reais e arquivos `.xlsx` locais sao ignorados pelo Git.
-- A pasta `Planilha Puxada/` fica fora do Git.
-- A base publica e apenas `data/dados_ficticios.csv`.
-- O app valida colunas obrigatorias antes de processar a base.
-- O app limita o tamanho do CSV usado no dashboard.
-- O app bloqueia caminhos fora da pasta do projeto.
-- Exportacoes CSV e Excel sao sanitizadas contra formula injection.
-- O GitHub Actions compila o projeto e executa verificacoes de seguranca.
-
-Mais detalhes estao em:
-
-```text
-SECURITY.md
-docs/seguranca_github.md
-```
-
-## O que este projeto demonstra
-
-Este projeto mostra habilidades em:
-
-- Tratamento de dados com Python.
-- Criacao de dashboards interativos.
-- Modelagem simples de regras operacionais.
-- Organizacao de projeto para GitHub.
-- Cuidados com privacidade de dados.
-- Automacao de validacoes com GitHub Actions.
-
-## Status
-
-Projeto publicado como portfolio, com dados ficticios e sem dependencia de
-informacoes reais.
+- leitura e tratamento de CSV com Pandas;
+- criacao de KPIs;
+- classificacao de horarios por turno;
+- construcao de dashboard com Streamlit;
+- visualizacoes com Plotly;
+- cuidado para publicar apenas dados ficticios.
